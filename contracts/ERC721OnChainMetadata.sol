@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/Base64.sol";
 /**
  * @title ERC721 wrapper to easily create NFTs with on-chain metadata,
  * useful for creating html/js based parametric NFTs or any NFT with dynamic metadata.
- * @author Daniel Abalde aka DaniGA aka DGA 
+ * @author Daniel Gonzalez Abalde aka @DGANFT aka DaniGA#9856.
  * @dev The developer is responsible for assigning metadata for the contract and tokens
  * by inheriting this contract and using _addValue() and _setValue() methods. The tokenURI()
  * and contractURI() methods of this contract are responsible for converting the metadata
