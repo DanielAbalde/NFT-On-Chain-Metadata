@@ -5,51 +5,42 @@ pragma solidity ^0.8.1;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Base64.sol"; 
 
-
-// if burn, delete _tokenMetadata[tokenId]
-
 /**
- * @title ERC721OnChainMetadata
- * @dev ERC721 
+ * @title ERC721 wrapper to easily create NFTs with on-chain metadata,
+ * useful for creating html/js based parametric NFTs or any NFT with dynamic metadata.
+ * @author Daniel Abalde aka DaniGA aka DGA 
+ * @dev The developer is responsible for assigning metadata for the contract and tokens
+ * by inheriting this contract and using _addValue() and _setValue() methods. The tokenURI()
+ * and contractURI() methods of this contract are responsible for converting the metadata
+ * into a Base64-encoded json. 
  */
 contract ERC721OnChainMetadata is ERC721
-{
-
+{ 
   struct Metadata
   {
-    uint256 keyCount; 
-    mapping(bytes32 => bytes[]) data;
-    mapping(bytes32 => uint256) valueCount;
+    uint256 keyCount;                           // number of metadata keys
+    mapping(bytes32 => bytes[]) data;           // key => values
+    mapping(bytes32 => uint256) valueCount;     // key => number of values
   }
-  
-  Metadata _contractMetadata;
-  mapping(uint256 => Metadata) _tokenMetadata;
-
-  bytes32 constant key_contract_name = "name";
-  bytes32 constant key_contract_description = "description";
-  bytes32 constant key_contract_image = "image";
-  bytes32 constant key_contract_external_link = "external_link";
-  bytes32 constant key_contract_seller_fee_basis_points = "seller_fee_basis_points";
-  bytes32 constant key_contract_fee_recipient = "fee_recipient";
-
-  bytes32 constant key_token_name = "name";
-  bytes32 constant key_token_description = "description";
-  bytes32 constant key_token_image = "image";
-  bytes32 constant key_token_animation_url = "animation_url";
-  bytes32 constant key_token_external_url = "external_url";
-  bytes32 constant key_token_background_color = "background_color";
-  bytes32 constant key_token_youtube_url = "youtube_url";
-  bytes32 constant key_token_attributes_trait_type = "trait_type";
-  bytes32 constant key_token_attributes_trait_value = "trait_value";
-  bytes32 constant key_token_attributes_display_type = "trait_display"; 
-
+   
+  Metadata _contractMetadata;                   // metadata for the contract
+  mapping(uint256 => Metadata) _tokenMetadata;  // metadata for each token
  
   constructor(string memory name, string memory symbol) ERC721(name, symbol){ }
  
+  /**
+   * @dev Get the values of a token metadata key.
+   * @param tokenId the token identifier.
+   * @param key the token metadata key.
+   */
   function _getValues(uint256 tokenId, bytes32 key) internal view returns (bytes[] memory){ 
     return _tokenMetadata[tokenId].data[key];
   }
-
+  /**
+   * @dev Get the first value of a token metadata key.
+   * @param tokenId the token identifier.
+   * @param key the token metadata key.
+   */
   function _getValue(uint256 tokenId, bytes32 key) internal view returns (bytes memory){ 
     bytes[] memory array = _getValues(tokenId, key);
     if(array.length > 0){
@@ -58,10 +49,17 @@ contract ERC721OnChainMetadata is ERC721
       return "";
     } 
   }
-
+  /**
+   * @dev Get the values of a contract metadata key. 
+   * @param key the contract metadata key.
+   */
   function _getValues(bytes32 key) internal view returns (bytes[] memory){ 
     return _contractMetadata.data[key];
   }
+  /**
+   * @dev Get the first value of a contract metadata key. 
+   * @param key the contract metadata key.
+   */
   function _getValue(bytes32 key) internal view returns (bytes memory){ 
     bytes[] memory array = _getValues(key);
     if(array.length > 0){
@@ -70,7 +68,12 @@ contract ERC721OnChainMetadata is ERC721
       return "";
     } 
   }
-
+  /**
+   * @dev Set the values on a token metadata key.
+   * @param tokenId the token identifier.
+   * @param key the token metadata key.
+   * @param values the token metadata values.
+   */
   function _setValues(uint256 tokenId, bytes32 key, bytes[] memory values) internal {
     Metadata storage meta = _tokenMetadata[tokenId];
     
@@ -80,19 +83,35 @@ contract ERC721OnChainMetadata is ERC721
     _tokenMetadata[tokenId].data[key] = values;
     _tokenMetadata[tokenId].valueCount[key] = values.length;
   }
-
+  /**
+   * @dev Set a single value on a token metadata key.
+   * @param tokenId the token identifier.
+   * @param key the token metadata key.
+   * @param value the token metadata value.
+   */
   function _setValue(uint256 tokenId, bytes32 key, bytes memory value) internal {
     bytes[] memory values = new bytes[](1);
     values[0] = value;
     _setValues(tokenId, key, values);
   }
-
+  /**
+   * @dev Set values on a given Metadata instance.
+   * @param meta the metadata to modify.
+   * @param key the token metadata key.
+   * @param values the token metadata values.
+   */
   function _addValues(Metadata storage meta, bytes32 key, bytes[] memory values) internal {
       require(meta.valueCount[key] == 0, "Metadata already contains given key");
       meta.keyCount = meta.keyCount + 1;
       meta.data[key] = values;
       meta.valueCount[key] = values.length;
   }
+  /**
+   * @dev Set a single value on a given Metadata instance.
+   * @param meta the metadata to modify.
+   * @param key the token metadata key.
+   * @param value the token metadata value.
+   */
   function _addValue(Metadata storage meta, bytes32 key, bytes memory value) internal { 
       bytes[] memory values = new bytes[](1);
       values[0] = value;
