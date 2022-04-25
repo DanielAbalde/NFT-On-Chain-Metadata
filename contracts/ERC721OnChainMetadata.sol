@@ -4,7 +4,7 @@ pragma solidity ^0.8.1;
   
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Base64.sol"; 
-
+ 
 /**
  * @title ERC721 wrapper to easily create NFTs with on-chain metadata,
  * useful for creating html/js based parametric NFTs or any NFT with dynamic metadata.
@@ -181,3 +181,23 @@ contract ERC721OnChainMetadata is ERC721
   }
 
 }
+
+
+  bytes32 constant key_contract_name = "name";
+  bytes32 constant key_contract_description = "description";
+  bytes32 constant key_contract_image = "image";
+  bytes32 constant key_contract_external_link = "external_link";
+  bytes32 constant key_contract_seller_fee_basis_points = "seller_fee_basis_points";
+  bytes32 constant key_contract_fee_recipient = "fee_recipient";
+
+  bytes32 constant key_token_name = "name";
+  bytes32 constant key_token_description = "description";
+  bytes32 constant key_token_image = "image";
+  bytes32 constant key_token_animation_url = "animation_url";
+  bytes32 constant key_token_external_url = "external_url";
+  bytes32 constant key_token_background_color = "background_color";
+  bytes32 constant key_token_youtube_url = "youtube_url";
+  bytes32 constant key_token_attributes_trait_type = "trait_type";
+  bytes32 constant key_token_attributes_trait_value = "trait_value";
+  bytes32 constant key_token_attributes_display_type = "trait_display"; 
+ 
