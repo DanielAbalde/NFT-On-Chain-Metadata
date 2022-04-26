@@ -2,7 +2,7 @@
 
 pragma solidity >=0.8.1;
 
-import "../contracts/ERC721OnChainMetadata.sol";
+import "./ERC721OnChainMetadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 // https://testnets.opensea.io/collection/erc721onchainmetadata-with-p5-js
@@ -12,15 +12,16 @@ contract Example2ERC721OnChainMetadata is ERC721OnChainMetadata, Ownable
     bytes32 constant key_token_front_color = "frontColor";
     bytes32 constant key_token_back_color = "backColor";
     bytes32 constant key_token_radius = "radius";
+    
     string private _baseURL;
     uint256 private _tokenCount;
 
     constructor() ERC721OnChainMetadata("ERC721OnChainMetadata Example 2", "Ex2"){
         _baseURL = "https://ipfs.io/ipfs/QmZBApzAghjsTxcS6UuPGqXNd6thuqkbWUrY5bhJJFQtWa/";
         _addValue(_contractMetadata, key_contract_name, abi.encode("ERC721OnChainMetadata with p5.js"));
-        _addValue(_contractMetadata, key_contract_description, abi.encode(string(abi.encodePacked("Simple example of ERC721OnChainMetadata using p5.js. See ", "https://github.com/DanielAbalde/HtmlBasedNFT", "."))));
+        _addValue(_contractMetadata, key_contract_description, abi.encode(string(abi.encodePacked("Simple example of ERC721OnChainMetadata using p5.js. See ", "https://github.com/DanielAbalde/NFT-On-Chain-Metadata", "."))));
         _addValue(_contractMetadata, key_contract_image, abi.encode(createSVG("white", "black", "50")));
-        _addValue(_contractMetadata, key_contract_external_link, abi.encode("https://github.com/DanielAbalde/HtmlBasedNFT"));
+        _addValue(_contractMetadata, key_contract_external_link, abi.encode("https://github.com/DanielAbalde/NFT-On-Chain-Metadata"));
         _addValue(_contractMetadata, key_contract_seller_fee_basis_points, abi.encode(200));
         _addValue(_contractMetadata, key_contract_fee_recipient, abi.encode(_msgSender()));
     }

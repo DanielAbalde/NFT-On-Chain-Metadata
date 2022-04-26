@@ -2,7 +2,7 @@
 
 pragma solidity >=0.8.1;
 
-import "../contracts/ERC721OnChainMetadata.sol";
+import "./ERC721OnChainMetadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
   
   /*
@@ -13,9 +13,9 @@ contract Example1ERC721OnChainMetadata is ERC721OnChainMetadata, Ownable
     constructor() ERC721OnChainMetadata("ERC721OnChainMetadata Example 1", "721OnChain1"){
 
         _addValue(_contractMetadata, key_contract_name, abi.encode("ERC721OnChainMetadata Example 1"));
-        _addValue(_contractMetadata, key_contract_description, abi.encode(string(abi.encodePacked("Simple example of ERC721OnChainMetadata using svg images. See ", "https://github.com/DanielAbalde/HtmlBasedNFT", "."))));
+        _addValue(_contractMetadata, key_contract_description, abi.encode(string(abi.encodePacked("Simple example of ERC721OnChainMetadata using svg images. See ", "https://github.com/DanielAbalde/NFT-On-Chain-Metadata", "."))));
         _addValue(_contractMetadata, key_contract_image, abi.encode(createSVG("blue")));
-        _addValue(_contractMetadata, key_contract_external_link, abi.encode("https://github.com/DanielAbalde/HtmlBasedNFT"));
+        _addValue(_contractMetadata, key_contract_external_link, abi.encode("https://github.com/DanielAbalde/NFT-On-Chain-Metadata"));
         _addValue(_contractMetadata, key_contract_seller_fee_basis_points, abi.encode(200));
         _addValue(_contractMetadata, key_contract_fee_recipient, abi.encode(_msgSender()));
 
