@@ -17,6 +17,8 @@ contract Example3ERC1155OnChainMetadata is ERC1155OnChainMetadata, Ownable
     _addValue(_contractMetadata, key_contract_external_link, abi.encode("https://github.com/DanielAbalde/NFT-On-Chain-Metadata"));
     _addValue(_contractMetadata, key_contract_seller_fee_basis_points, abi.encode(200));
     _addValue(_contractMetadata, key_contract_fee_recipient, abi.encode(_msgSender()));
+
+    mintWithMetadata(_msgSender(), 0, 10, "First Test", "First test of ERC1155OnChainMetadata", "https://gateway.pinata.cloud/ipfs/QmUcith5mSybWjN1gwT1UfsK4v4LeBsiHRrKA3K6LeGRaS", "https://gateway.pinata.cloud/ipfs/QmSR38cmJMAqdRrqBkmEWUdwyQ7zdAmiFD2VXXRKtv4Z9x/");
   }
  
   function mintWithMetadata(address to, uint256 id, uint256 amount, string memory name, string memory description, string memory imageURI, string memory url) public onlyOwner{ 
