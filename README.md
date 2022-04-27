@@ -1,7 +1,4 @@
 <h1 align="center"> NFT On-Chain Metadata </h1> 
-
-
-
 <p align="center">Easily and quickly create ERC721 and ERC115 contracts with on-chain metadata, supporting dynamic metatada, parametric NFTs, SVG-based NFTs and HTML/JS-based NFTs.</p>
 
 
@@ -12,7 +9,7 @@ These contracts do not unlock new functionality, but it makes it easy and quick 
  
 [OnChainMetadata.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/OnChainMetadata.sol) is a storage contract containing the metadata for the contract and its tokens and the functionality to create the token URI and contract URI expected by NFT platforms.
 
-```sol
+```solidity
 abstract contract OnChainMetadata 
 { 
   struct Metadata
@@ -59,6 +56,9 @@ abstract contract OnChainMetadata
 
 [Example3-1155-html.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example3-1155-html.sol) is an ERC1155 using on-chain SVG images.
 
+#### Setup
+
+I started working with Truffle + Alchemy but due to problems deploying in Mumbai I switched to Hardhat + Alchemy, I didn't remove the Truffle configuration to preserve the tests (I know Hardhat has plugins to use it, but it's worth it here).
 
 ## 🔎 Disclaimer
 
@@ -69,12 +69,12 @@ Also note that NFT platforms such as OpenSea or LooksRare may have their own res
 
 ## 🔌 Usage
 
-```sol
+```solidity
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.8.1;
 
-import "./ERC721OnChainMetadata.sol";
+import "https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol";
 
 // 1) Inherit from ERC721OnChainMetadata or ERC1155OnChainMetadata
 
