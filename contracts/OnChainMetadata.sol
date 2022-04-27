@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/utils/Base64.sol";
  * and contractURI() methods of this contract are responsible for converting the metadata
  * into a Base64-encoded json readable by OpenSea, LooksRare and many other NFT platforms. 
  */
-contract OnChainMetadata 
+abstract contract OnChainMetadata 
 { 
   struct Metadata
   {

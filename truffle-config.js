@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const { API_URL_MATIC,API_URL_MUMBAI, MNEMONIC, API_SCAN, OWNER, DEV } = process.env;
+const { API_URL_MATIC, API_URL_MUMBAI, MNEMONIC, API_SCAN, OWNER, DEV } = process.env;
 
 module.exports = {
   networks: {
@@ -17,6 +17,9 @@ module.exports = {
       network_id: 80001, 
       gasPrice: 45000000000,
       gas: 20000000, //4M is the max
+      confirmations: 10,
+      timeoutBlocks: 200,
+      skipDryRun: true,
       from: DEV
     },
     matic: {
@@ -30,6 +33,11 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: true,
       from: OWNER
+    },
+    dashboard: {
+      port: 24012,
+      host: "localhost",
+      networkCheckTimeout: 120000,
     }
   },
   compilers: {

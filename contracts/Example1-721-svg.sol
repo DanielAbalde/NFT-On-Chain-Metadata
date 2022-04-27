@@ -5,12 +5,15 @@ pragma solidity >=0.8.1;
 import "./ERC721OnChainMetadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
   
-  /*
-  https://testnets.opensea.io/collection/erc721onchainmetadata-example-1-6bzpxwdaee
-  */
+/**
+* 0x895bb6EF48FBbFD9B940A1cbAFdCA9C8876BA1DA
+* https://opensea.io/collection/erc721onchainmetadata-example-1-v2
+
+*/
+
 contract Example1ERC721OnChainMetadata is ERC721OnChainMetadata, Ownable
 { 
-    constructor() ERC721OnChainMetadata("ERC721OnChainMetadata Example 1", "721OnChain1"){
+    constructor() ERC721OnChainMetadata("ERC721OnChainMetadata Example 1", "Ex1"){
 
         _addValue(_contractMetadata, key_contract_name, abi.encode("ERC721OnChainMetadata Example 1"));
         _addValue(_contractMetadata, key_contract_description, abi.encode(string(abi.encodePacked("Simple example of ERC721OnChainMetadata using svg images. See ", "https://github.com/DanielAbalde/NFT-On-Chain-Metadata", "."))));

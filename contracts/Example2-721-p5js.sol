@@ -4,15 +4,16 @@ pragma solidity >=0.8.1;
 
 import "./ERC721OnChainMetadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-// https://testnets.opensea.io/collection/erc721onchainmetadata-with-p5-js
-
+ 
+/**
+* 0x1D635c47ba69a6Fd3b6Cc16c0e39Fb6716b17736
+*/
 contract Example2ERC721OnChainMetadata is ERC721OnChainMetadata, Ownable
 { 
     bytes32 constant key_token_front_color = "frontColor";
     bytes32 constant key_token_back_color = "backColor";
     bytes32 constant key_token_radius = "radius";
-    
+
     string private _baseURL;
     uint256 private _tokenCount;
 
@@ -24,6 +25,11 @@ contract Example2ERC721OnChainMetadata is ERC721OnChainMetadata, Ownable
         _addValue(_contractMetadata, key_contract_external_link, abi.encode("https://github.com/DanielAbalde/NFT-On-Chain-Metadata"));
         _addValue(_contractMetadata, key_contract_seller_fee_basis_points, abi.encode(200));
         _addValue(_contractMetadata, key_contract_fee_recipient, abi.encode(_msgSender()));
+    
+        safeMintWithMetadata("white", "black", "40");
+        safeMintWithMetadata("red", "pink", "100");
+        safeMintWithMetadata("green", "lime", "80");
+        safeMintWithMetadata("blue", "aqua", "120");
     }
    
     function safeMintWithMetadata(string memory frontColor, string memory backColor, string memory radius) public onlyOwner{
