@@ -1,7 +1,7 @@
 {
   "name": "onchainmetadata",
   "version": "1.0.0",
-  "description": "",
+  "description": "Easily and quickly create ERC721 and ERC115 contracts with on-chain metadata, supporting dynamic metatada, parametric NFTs, SVG-based NFTs and HTML/JS-based NFTs.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

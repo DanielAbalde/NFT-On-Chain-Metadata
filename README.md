@@ -10,7 +10,7 @@
 
 These contracts do not unlock new functionality, but it makes it easy and quick to implement so that any web developer capable of deploying a smart contract can create html-based NFT applications.
  
-[OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/OnChainMetadata.sol) is a storage contract containing the metadata for the contract and its tokens and the functionality to create the token URI and contract URI expected by NFT platforms.
+[OnChainMetadata.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/OnChainMetadata.sol) is a storage contract containing the metadata for the contract and its tokens and the functionality to create the token URI and contract URI expected by NFT platforms.
 
 ```sol
 abstract contract OnChainMetadata 
@@ -49,20 +49,70 @@ abstract contract OnChainMetadata
   (...)
 ```
 
-[ERC721OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) and [ERC1155OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) are simple implementions for the main NFT contracts. You should use one of these or create your own version.
+[ERC721OnChainMetadata.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) and [ERC1155OnChainMetadata.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) are simple implementions for the main NFT contracts, returning the URIs in the standard methods. **You should use one of these or create your own version.**
+
+#### Examples 
+
+[Example1-721-svg.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example1-721-svg.sol) is an ERC271 using on-chain SVG images.
+
+[Example2-721-p5js.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example2-721-p5js.sol) is an ERC721 using a p5.js sketch hosted on IPFS.
+
+[Example3-1155-html.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example3-1155-html.sol) is an ERC1155 using on-chain SVG images.
 
 
-
-
-## ⚠️ Disclaimer
+## 🔎 Disclaimer
 
 It took me several refactorings to find a good balance between functionality, ease of implementation and cost of gas. Since the contract takes care of creating the tokenURI as an embedded json resource and handles a lot of text and possibly redudant information (repeated in the tokenId->metadata map for example), gas consumption is an issue in this kind of NFTs. My advice (apart from leaving Ethereum L1 in the past) is to try building your functionality on top of [ERC721OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) or [ERC1155OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) and if gas turns out to be a problem, take the *_createTokenURI()* (and *_createContractURI()* if needed) method code from [OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/OnChainMetadata.sol) and adapt it into your own contract with only the metadata you need.
 
-Also note that NFT platforms such as OpenSea or LooksRare may have their own restrictions for html-based NFTs.
+Also note that NFT platforms such as OpenSea or LooksRare may have their own restrictions for html-based NFTs. Use it at your own risk.
+
 
 ## 🔌 Usage
 
-// if burn, delete _tokenMetadata[tokenId]
+```sol
+// SPDX-License-Identifier: GPL-3.0
 
+pragma solidity >=0.8.1;
 
+import "./ERC721OnChainMetadata.sol";
+
+// 1) Inherit from ERC721OnChainMetadata or ERC1155OnChainMetadata
+
+contract MyNFT is ERC721OnChainMetadata
+{ 
+    constructor() ERC721OnChainMetadata("MyNFT", "MyNFT"){
+
+        // 2) Set contract metadata: name, description, image, external link, seller fee basis points, fee recipient.
+
+        _addValue(_contractMetadata, key_contract_name, abi.encode("MyNFT"));
+        _addValue(_contractMetadata, key_contract_description, abi.encode("Blah blah blah"));
+        _addValue(_contractMetadata, key_contract_image, abi.encode("<path-to-contract-image>"));
+        _addValue(_contractMetadata, key_contract_external_link, abi.encode("<webpage>"));
+        _addValue(_contractMetadata, key_contract_seller_fee_basis_points, abi.encode(200));
+        _addValue(_contractMetadata, key_contract_fee_recipient, abi.encode(_msgSender()));
+
+    }
+  
+  // 3) On your minting function (or whenever a token is minted) set the token metadata: name, description, image, external link, animation url, external url, background color, youtube url, attributes.
+  // If your NFT is burnable, remember to delete its metadata.
+
+  function _safeMintWithMetadata(uint256 tokenId, string memory name, string memory description, string memory image) internal{
+        _setValue(tokenId, key_token_name, abi.encode(name));
+        _setValue(tokenId, key_token_description, abi.encode(description));
+        _setValue(tokenId, key_token_image, abi.encode(image));
+        _safeMint(_msgSender(), tokenId, ""); 
+    }
+
+  // 4) Optionally you can add your own metadata using byte32 keys and bytes[] values.
+}
+```
+ 
 ## ☕ Contribute  
+
+Feel free to open an Issue or Pull Request!
+
+My EVM wallet: daniga.wallet = 0x4443049b49caf8eb4e9235aa1efe38fcfa0055a1.
+
+Discord for NFT development and my NFT projects comming soon.
+
+Follow me on Twitter [@DGANFT](https://twitter.com/DGANFT)!
