@@ -6,9 +6,8 @@ import "./ERC721OnChainMetadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
   
 /**
-* 0x895bb6EF48FBbFD9B940A1cbAFdCA9C8876BA1DA
+* https://polygonscan.com/address/0x895bb6ef48fbbfd9b940a1cbafdca9c8876ba1da
 * https://opensea.io/collection/erc721onchainmetadata-example-1-v2
-
 */
 
 contract Example1ERC721OnChainMetadata is ERC721OnChainMetadata, Ownable

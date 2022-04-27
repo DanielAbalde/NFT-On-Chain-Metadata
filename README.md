@@ -50,11 +50,11 @@ abstract contract OnChainMetadata
 
 #### Examples 
 
-[Example1-721-svg.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example1-721-svg.sol) is an ERC271 using on-chain SVG images.
+[Example1-721-svg.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example1-721-svg.sol) is an ERC271 using on-chain SVG images. [See on OpenSea](https://opensea.io/collection/erc721onchainmetadata-example-1-v2). 
 
-[Example2-721-p5js.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example2-721-p5js.sol) is an ERC721 using a p5.js sketch hosted on IPFS.
+[Example2-721-p5js.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example2-721-p5js.sol) is an ERC721 using a p5.js sketch hosted on IPFS. [See on OpenSea](https://opensea.io/collection/erc721onchainmetadata-with-p5-js).
 
-[Example3-1155-html.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example3-1155-html.sol) is an ERC1155 using on-chain SVG images.
+[Example3-1155-html.sol](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/Example3-1155-html.sol) is an ERC1155 using on-chain SVG images. [See on Opensea](https://opensea.io/collection/erc1155onchainmetadata-example-3).
 
 #### Setup
 
@@ -111,7 +111,7 @@ contract MyNFT is ERC721OnChainMetadata
 
 Feel free to open an Issue or Pull Request!
 
-My EVM wallet: daniga.wallet = 0x4443049b49caf8eb4e9235aa1efe38fcfa0055a1.
+My EVM wallet: daniga.eth | 0x4443049b49caf8eb4e9235aa1efe38fcfa0055a1, or make an offer to the example NFTs!
 
 Discord for NFT development and my NFT projects comming soon.
 

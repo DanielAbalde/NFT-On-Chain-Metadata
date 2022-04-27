@@ -4,9 +4,10 @@
 
 require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-etherscan");
 require("hardhat-gas-reporter");
-
-const { API_URL_MATIC, API_URL_MUMBAI, MNEMONIC, PRIVATE_KEY } = process.env;
+ 
+const { API_URL_MATIC, API_URL_MUMBAI, MNEMONIC, PRIVATE_KEY, POLYGONSCAN_API_KEY } = process.env;
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -36,5 +37,8 @@ module.exports = {
     enabled: true,
     currency: 'CHF',
     gasPrice: 21
-  }
+  },
+  etherscan: {
+    apiKey: POLYGONSCAN_API_KEY,
+ }
 }
