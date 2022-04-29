@@ -69,6 +69,8 @@ Also note that NFT platforms such as OpenSea or LooksRare may have their own res
 
 ## 🔌 Usage
 
+The basic use is to inherit from [ERC721OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol) or [ERC1155OnChainMetadata](https://github.com/DanielAbalde/NFT-On-Chain-Metadata/blob/master/contracts/ERC721OnChainMetadata.sol), set contract metadata from constructor and set token metadata from mint function.
+
 ```solidity
 // SPDX-License-Identifier: GPL-3.0
 
@@ -111,8 +113,10 @@ contract MyNFT is ERC721OnChainMetadata
 
 Feel free to open an Issue or Pull Request!
 
-My EVM wallet: daniga.eth | 0x4443049b49caf8eb4e9235aa1efe38fcfa0055a1, or make an offer to the example NFTs!
+You can make an offer on the example NFTs, if it's at least a coffee I'll take it!
 
-Discord for NFT development and my NFT projects comming soon.
+My address: daniga.eth or 0x4443049b49caf8eb4e9235aa1efe38fcfa0055a1.
+
+We can talk about NFT development on [Discord](https://discord.gg/QPMapnqAh7).
 
 Follow me on Twitter [@DGANFT](https://twitter.com/DGANFT)!
